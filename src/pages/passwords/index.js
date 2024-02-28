@@ -16,8 +16,14 @@ export function Passwords() {
       const passwords = await getItem("@pass");
       setListPasswords(passwords);
     }
+
     loadPasswords();
   }, [focused]);
+
+  async function handleDeletePassword(item) {
+    const passwords = await removeItem("@pass", item);
+    setListPasswords(passwords);
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -29,7 +35,12 @@ export function Passwords() {
           style={{ flex: 1, paddingTop: 14 }}
           data={listPasswords}
           keyExtractor={(item) => String(item)}
-          renderItem={({ item }) => <PasswordItem data={item} />}
+          renderItem={({ item }) => (
+            <PasswordItem
+              data={item}
+              removePassword={() => handleDeletePassword(item)}
+            />
+          )}
         />
       </View>
     </SafeAreaView>

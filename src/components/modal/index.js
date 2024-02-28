@@ -17,6 +17,8 @@ export function ModalPassword({ password, handleClose }) {
 
     alert("senha salva com sucesso!");
 
+    
+
     handleClose();
   }
 

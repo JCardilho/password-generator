@@ -1,9 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const useStorage = () => {
-  const getItem = async () => {
+  const getItem = async (Key) => {
     try {
-      const password = await AsyncStorage.getItem("Key");
+      const password = await AsyncStorage.getItem(Key);
 
       return JSON.parse(password) || [];
     } catch (error) {
@@ -17,7 +17,7 @@ const useStorage = () => {
       let passwords = await getItem(Key);
 
       passwords.push(value);
-      await AsyncStorage.setItem("Key", JSON.stringify(passwords));
+      await AsyncStorage.setItem(Key, JSON.stringify(passwords));
     } catch (error) {
       console.log("Erro ao salvar ", error);
     }
@@ -32,6 +32,7 @@ const useStorage = () => {
       });
 
       await AsyncStorage.setItem(Key, JSON.stringify(myPasswords));
+
       return myPasswords;
     } catch (error) {
       console.log("Erro ao Deletar ", error);
